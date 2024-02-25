@@ -1,9 +1,10 @@
 function getPlayerChoice() {
     keepGoing = true;
+    let playerChoice
     while (keepGoing) {
         let playerPrompt = prompt("Rock, Paper or Scissors?");
         if (typeof(playerPrompt) === "string" || playerPrompt instanceof String) {
-            let playerChoice = playerPrompt.toLowerCase();
+            playerChoice = playerPrompt.toLowerCase();
             if (playerChoice === 'rock' || playerChoice === 'paper' || playerChoice === 'scissors') {
                 keepGoing = false;
             } else {
@@ -30,11 +31,20 @@ function getComputerChoice() {
 }
 
 function playRound(playerChoice, computerChoice) {
-    
+    let result;
+    if (playerChoice === 'rock' && computerChoice === 'scissors' || playerChoice === 'paper' && computerChoice === 'rock' ||playerChoice === 'scissors' && computerChoice === 'paper') {
+        result = 'The winner of this round is the player!'
+    } else if (playerChoice === computerChoice) {
+        result = 'This round ends in a draw!'
+    } else {
+        result = 'The winner of this round is the computer!'
+    }
+    return result;
 }
 
+for (let i = 0; i < 5; i++) {
+    let playerChoice = getPlayerChoice();
+    let computerChoice = getComputerChoice();
 
-const playerChoice = getPlayerChoice();
-const computerChoice = getComputerChoice();
-
-console.log(playRound(playerChoice, computerChoice));
+    console.log(playRound(playerChoice, computerChoice));
+}
