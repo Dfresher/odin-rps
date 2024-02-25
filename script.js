@@ -32,19 +32,40 @@ function getComputerChoice() {
 
 function playRound(playerChoice, computerChoice) {
     let result;
-    if (playerChoice === 'rock' && computerChoice === 'scissors' || playerChoice === 'paper' && computerChoice === 'rock' ||playerChoice === 'scissors' && computerChoice === 'paper') {
-        result = 'The winner of this round is the player!'
+    if (playerChoice === 'rock' && computerChoice === 'scissors' || playerChoice === 'paper' && computerChoice === 'rock' || playerChoice === 'scissors' && computerChoice === 'paper') {
+        console.log('The winner of this round is the player!') ;
+        result = 'player';
     } else if (playerChoice === computerChoice) {
-        result = 'This round ends in a draw!'
+        console.log('This round ends in a draw!')
+        result = 'draw';
     } else {
-        result = 'The winner of this round is the computer!'
+        console.log('The winner of this round is the computer!')
+        result = 'computer';
     }
     return result;
 }
 
-for (let i = 0; i < 5; i++) {
-    let playerChoice = getPlayerChoice();
-    let computerChoice = getComputerChoice();
+function playGame() {
+    let roundWinner;
+    let winner = 0;
+    for (let i = 0; i < 5; i++) {
+        let playerChoice = getPlayerChoice();
+        let computerChoice = getComputerChoice();
+        roundWinner = playRound(playerChoice, computerChoice);
+        if (roundWinner === 'player') {
+            winner++;
+        } else if (roundWinner === 'computer') {
+            winner--;
+        }
+    }
 
-    console.log(playRound(playerChoice, computerChoice));
+    if (winner > 0) {
+        console.log('THE FINAL WINNER IS THE PLAYER!!!');
+    } else if (winner < 0) {
+        console.log('THE FINAL WINNER IS THE COMPUTER!!!');
+    } else {
+        console.log('THE GAME ENDS IN A DRAW')
+    }
 }
+
+playGame();
